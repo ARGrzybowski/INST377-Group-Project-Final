@@ -1,4 +1,3 @@
-
 const urlParams = new URLSearchParams(window.location.search);
 const word = urlParams.get('word');
 
@@ -8,6 +7,7 @@ const resultsContainer = document.getElementById('results-container');
 if (word) {
     searchQueryElement.textContent = word;
     fetchDefinition(word);
+    storeSearchQuery(word);
 } else {
     searchQueryElement.textContent = 'No search term provided';
 }
@@ -27,6 +27,7 @@ async function fetchDefinition(word) {
         resultsContainer.innerHTML = `<p>Sorry, there was an error fetching the definition.</p>`;
     }
 }
+
 function displayResults(data) {
     let htmlContent = '';
 
@@ -67,3 +68,28 @@ function displayResults(data) {
 
     resultsContainer.innerHTML = htmlContent;
 }
+
+async function storeSearchQuery(word) {
+    try {
+        const response = await fetch('/api/save-search', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                search_query: word, // Store the word in the 'search_query' column
+            })
+        });
+
+        if (!response.ok) {
+            const data = await response.json();
+            console.error("Error storing search:", data.error);
+        } else {
+            console.log("Search query stored successfully!");
+        }
+    } catch (error) {
+        console.error("Error storing search:", error);
+    }
+}
+
+

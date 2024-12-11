@@ -544,3 +544,56 @@ audio:focus {
     outline: none;
     border: 2px solid #4CAF50;
 }
+/* Table Styles */
+#search-history-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+#search-history-table th, 
+#search-history-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#search-history-table th {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 1.1rem;
+}
+
+#search-history-table td {
+    font-size: 1rem;
+    color: #555;
+}
+
+#search-history-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#search-history-table tr:hover {
+    background-color: #e8f5e9;
+}
+
+#search-history-table td,
+#search-history-table th {
+    transition: background-color 0.3s ease;
+}
+
+/* Table Header Styling */
+#search-history-table th {
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Hover Effect on Rows */
+#search-history-table tr:hover {
+    cursor: pointer;
+    background-color: #f1f1f1;
+}
