@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Page</title>
+    <link rel="stylesheet" href="INST377_Final.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="INST377_Final_Index.html">Home</a></li>
+                <li><a href="INST377_Final_about.html">About</a></li>
+                <li><a href="INST377_Final_history.html">Search History</a></li>
+            </ul>
+        </nav>
+        <h1>Search Page</h1>
+        <p>Find the information you're looking for</p>
+    </header>
+
+    <main>
+        <section id="search">
+            <h2>Search for a Word</h2>
+            <form id="search-form" action="INST377_Final_Search.html" method="GET">
+                <input type="text" id="search-input" name="word" placeholder="Enter a word..." required>
+                <button type="submit">Search</button>
+            </form>
+        </section>
+
+        <section id="search-results">
+            <h2>Search Results for: <span id="search-query"></span></h2>
+            <div id="results-container">
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Word Lord</p>
+    </footer>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const word = urlParams.get('word');
+
+        const searchQueryElement = document.getElementById('search-query');
+        const resultsContainer = document.getElementById('results-container');
+        if (word) {
+            searchQueryElement.textContent = word;
+            fetchDefinition(word);
+        } else {
+            searchQueryElement.textContent = 'No search term provided';
+        }
+        async function fetchDefinition(word) {
+            try {
+                const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+                const data = await response.json();
+                if (data.title === 'No Definitions Found') {
+                    resultsContainer.innerHTML = `<p>No definitions found for <strong>${word}</strong></p>`;
+                } else {
+                    displayResults(data);
+                }
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                resultsContainer.innerHTML = `<p>Sorry, there was an error fetching the definition.</p>`;
+            }
+        }
+        function displayResults(data) {
+            let htmlContent = '';
+
+            data.forEach((entry) => {
+                htmlContent += `<div class="result-item">
+                    <h3 class="result-word">${entry.word}</h3>`;
+
+                if (entry.phonetics && entry.phonetics.length > 0) {
+                    entry.phonetics.forEach((phonetic) => {
+                        if (phonetic.text) {
+                            htmlContent += `<p class="pronunciation"><strong>Pronunciation:</strong> ${phonetic.text}</p>`;
+                        }
+
+                        if (phonetic.audio) {
+                            const audioUrl = phonetic.audio.startsWith('//') ? `https:${phonetic.audio}` : phonetic.audio;
+                            htmlContent += `<p><strong>Listen to the pronunciation:</strong></p>
+                                            <audio controls>
+                                                <source src="${audioUrl}" type="audio/mp3">
+                                                Your browser does not support the audio element.
+                                            </audio>`;
+                        }
+                    });
+                }
+                entry.meanings.forEach((meaning) => {
+                    htmlContent += `<p class="part-of-speech"><strong>Part of Speech:</strong> ${meaning.partOfSpeech}</p>`;
+                    meaning.definitions.forEach((definition, index) => {
+                        htmlContent += `<div class="definition">
+                            <p><strong>Definition ${index + 1}:</strong> ${definition.definition}</p>`;
+                        if (definition.example) {
+                            htmlContent += `<p><strong>Example:</strong> ${definition.example}</p>`;
+                        }
+                        htmlContent += `</div>`;
+                    });
+                });
+
+                htmlContent += `</div>`;
+            });
+
+            resultsContainer.innerHTML = htmlContent;
+        }
+    </script>
+</body>
+</html>
