@@ -2,28 +2,26 @@ const express = require('express');
 const { createClient } = require('@supabase/supabase-js');
 const cors = require('cors');
 const path = require('path');
-const serverless = require('serverless-http'); // Required for Vercel deployment
 
 const app = express();
+const port = process.env.PORT || 3000;
 
-// Environment variables for dynamic configuration
-const supabaseUrl = process.env.SUPABASE_URL || 'https://jazruzbcofsyekbxcfvv.supabase.co';
-const supabaseKey =
-  process.env.SUPABASE_KEY ||
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImphenJ1emJjb2ZzeWVrYnhjZnZ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzM5MzIxMTAsImV4cCI6MjA0OTUwODExMH0.lT9hXb9uyaq0fjJb7PML92z7zzQyO9j1PhdxI8UVAnc';
-
-const supabase = createClient(supabaseUrl, supabaseKey);
 
 app.use(cors());
-app.use(express.json());
-app.use(express.static(path.join(__dirname))); // Serve static files
 
-// Route: Home
+app.use(express.json()); 
+
+app.use(express.static(path.join(__dirname)));
+
+const supabaseUrl = 'https://jazruzbcofsyekbxcfvv.supabase.co';
+const supabaseKey =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImphenJ1emJjb2ZzeWVrYnhjZnZ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzM5MzIxMTAsImV4cCI6MjA0OTUwODExMH0.lT9hXb9uyaq0fjJb7PML92z7zzQyO9j1PhdxI8UVAnc';
+const supabase = createClient(supabaseUrl, supabaseKey);
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'INST377_Final_Index.html'));
 });
 
-// Route: Save search history
 app.post('/api/search-history', async (req, res) => {
   const { search_query } = req.body;
 
@@ -49,7 +47,6 @@ app.post('/api/search-history', async (req, res) => {
   }
 });
 
-// Route: Fetch search history
 app.get('/api/search-history', async (req, res) => {
   try {
     const { data, error } = await supabase
@@ -69,11 +66,12 @@ app.get('/api/search-history', async (req, res) => {
   }
 });
 
-// 404 Error Handler
+// 4. Handle invalid routes (404)
 app.use((req, res) => {
   res.status(404).send('404 - Not Found');
 });
 
-// Export for Vercel
-module.exports = app;
-module.exports.handler = serverless(app);
+// Start the server
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}`);
+});
