@@ -585,15 +585,52 @@ audio:focus {
     transition: background-color 0.3s ease;
 }
 
-/* Table Header Styling */
+
 #search-history-table th {
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
-/* Hover Effect on Rows */
+
 #search-history-table tr:hover {
     cursor: pointer;
     background-color: #f1f1f1;
 }
+/* About Page Styles */
+#about-page main h2 {
+    color: #4CAF50;
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+#about-page main p,
+#about-page main ul li {
+    font-size: 1rem;
+    color: #555;
+}
+
+#about-page main ul {
+    padding-left: 20px;
+    list-style: disc;
+}
+
+
+/* Active Navigation Link */
+nav ul li a.active {
+    background-color: #4CAF50; /* Highlight the active link */
+    color: white; /* Ensure contrast */
+    font-weight: bold; /* Make it stand out */
+    text-decoration: underline; /* Optional: underline */
+}
+
+.contact-form{
+    padding: 20px;
+    max-width: 70%;
+ 
+  }
+
+.contact-info{
+    padding: 20px;
+    max-width: 70%;
+  }
