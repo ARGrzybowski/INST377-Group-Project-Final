@@ -700,3 +700,10 @@ audio:focus {
         font-size: 0.9rem;
     }
 }
+/* Active Navigation Link */
+nav ul li a.active {
+    background-color: #4CAF50; /* Highlight the active link */
+    color: white; /* Ensure contrast */
+    font-weight: bold; /* Make it stand out */
+    text-decoration: underline; /* Optional: underline */
+}
