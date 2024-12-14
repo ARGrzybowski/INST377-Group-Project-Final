@@ -1,64 +1,76 @@
 const express = require('express');
 const { createClient } = require('@supabase/supabase-js');
-const bodyParser = require('body-parser');
+const cors = require('cors');
+const path = require('path');
 
 const app = express();
 const port = 3000;
 
-app.use(express.static(__dirname + '/public'));
+app.use(cors());
 
+app.use(express.json()); 
 
-app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname)));
 
-const supabaseUrl = 'https://rxplgwsnlbhonbfapovw.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ4cGxnd3NubGJob25iZmFwb3Z3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzM5Mzk2MDIsImV4cCI6MjA0OTUxNTYwMn0.2ezka0EAffBSF2Co2OHu59l9P6Md5tQ0h17xyPro-xY';
+const supabaseUrl = 'https://jazruzbcofsyekbxcfvv.supabase.co';
+const supabaseKey =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImphenJ1emJjb2ZzeWVrYnhjZnZ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzM5MzIxMTAsImV4cCI6MjA0OTUwODExMH0.lT9hXb9uyaq0fjJb7PML92z7zzQyO9j1PhdxI8UVAnc';
 const supabase = createClient(supabaseUrl, supabaseKey);
 
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'INST377_Final_Index.html'));
+});
+
 app.post('/api/search-history', async (req, res) => {
-    const { search_term } = req.body;
+  const { search_query } = req.body;
 
-    if (!search_term) {
-        return res.status(400).json({ error: 'Search term is required' });
+  if (!search_query) {
+    return res.status(400).json({ error: 'search_query is required.' });
+  }
+
+  try {
+    const { data, error } = await supabase
+      .from('search_history')
+      .insert([{ search_query }]);
+
+    if (error) {
+      console.error('Error saving to database:', error.message);
+      return res.status(500).json({ error: 'Failed to save to database' });
     }
 
-    try {
-        const { data, error } = await supabase
-            .from('search_history')
-            .insert([{ search_term }]);
-
-        if (error) {
-            console.error('Error saving search term:', error);
-            return res.status(500).json({ error: 'Failed to save search term' });
-        }
-
-        res.status(201).json({ message: 'Search term saved successfully', data });
-    } catch (error) {
-        console.error('Unexpected error:', error);
-        res.status(500).json({ error: 'An unexpected error occurred' });
-    }
+    console.log(`Word "${search_query}" saved to database`);
+    res.status(201).json({ message: 'Word saved successfully', data });
+  } catch (err) {
+    console.error('Unexpected error:', err.message);
+    res.status(500).json({ error: 'An unexpected error occurred' });
+  }
 });
 
 app.get('/api/search-history', async (req, res) => {
-    try {
-        // Fetch all search terms from the 'search_history' table
-        const { data, error } = await supabase
-            .from('search_history')
-            .select('*')
-            .order('searched_at', { ascending: false });
+  try {
+    const { data, error } = await supabase
+      .from('search_history')
+      .select('*')
+      .order('created_at', { ascending: false });
 
-        if (error) {
-            console.error('Error fetching search history:', error);
-            return res.status(500).json({ error: 'Failed to fetch search history' });
-        }
-
-        res.status(200).json(data);
-    } catch (error) {
-        console.error('Unexpected error:', error);
-        res.status(500).json({ error: 'An unexpected error occurred' });
+    if (error) {
+      console.error('Error fetching history:', error.message);
+      return res.status(500).json({ error: 'Failed to fetch search history' });
     }
+
+    res.status(200).json(data);
+  } catch (err) {
+    console.error('Unexpected error:', err.message);
+    res.status(500).json({ error: 'An unexpected error occurred' });
+  }
 });
 
+// 4. Handle invalid routes (404)
+app.use((req, res) => {
+  res.status(404).send('404 - Not Found');
+});
+
+// Start the server
 app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+  console.log(`Server running on http://localhost:${port}`);
 });
-
