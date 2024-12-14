@@ -2,14 +2,11 @@
   "version": 2,
   "builds": [
     { "src": "Server.js", "use": "@vercel/node" },
-    { "src": "INST377_Final_Index.html", "use": "@vercel/static" },
-    { "src": "INST377_Final_Search.html", "use": "@vercel/static" },
-    { "src": "INST377_Final_History.js", "use": "@vercel/static" },
-    { "src": "INST377_Final_Index.js", "use": "@vercel/static" },
-    { "src": "INST377_Final_Search.js", "use": "@vercel/static" }
+    { "src": "public/*", "use": "@vercel/static" }
   ],
   "routes": [
     { "src": "^/api/(.*)", "dest": "Server.js" },
+    { "src": "^/public/(.*)", "dest": "/public/$1" },
     { "src": "/(.*)", "dest": "/INST377_Final_Index.html" }
   ]
 }
