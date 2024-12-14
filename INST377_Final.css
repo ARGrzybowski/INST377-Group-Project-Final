@@ -623,3 +623,14 @@ nav ul li a.active {
     font-weight: bold; /* Make it stand out */
     text-decoration: underline; /* Optional: underline */
 }
+
+.contact-form{
+    padding: 20px;
+    max-width: 70%;
+ 
+  }
+
+.contact-info{
+    padding: 20px;
+    max-width: 70%;
+  }
