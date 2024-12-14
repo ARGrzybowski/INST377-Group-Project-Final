@@ -4,25 +4,27 @@ const cors = require('cors');
 const path = require('path');
 
 const app = express();
-const port = process.env.PORT || 3000; // Dynamic port assignment
+const port = process.env.PORT || 3000;
 
-// Middleware
+// Enable CORS and JSON body parsing
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname)));
 
-// Supabase Initialization
+// Serve static files from the "Public" folder
+app.use(express.static(path.join(__dirname, 'Public')));
+
+// Supabase client configuration
 const supabaseUrl = 'https://jazruzbcofsyekbxcfvv.supabase.co';
 const supabaseKey =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImphenJ1emJjb2ZzeWVrYnhjZnZ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzM5MzIxMTAsImV4cCI6MjA0OTUwODExMH0.lT9hXb9uyaq0fjJb7PML92z7zzQyO9j1PhdxI8UVAnc';
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-// Serve the Homepage
+// Serve the main index HTML file
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'INST377_Final_Index.html'));
+  res.sendFile(path.join(__dirname, 'Public', 'INST377_Final_Index.html'));
 });
 
-// POST Endpoint: Save Search Query to Supabase
+// API endpoint to save search history
 app.post('/api/search-history', async (req, res) => {
   const { search_query } = req.body;
 
@@ -48,7 +50,7 @@ app.post('/api/search-history', async (req, res) => {
   }
 });
 
-// GET Endpoint: Fetch Search History from Supabase
+// API endpoint to fetch search history
 app.get('/api/search-history', async (req, res) => {
   try {
     const { data, error } = await supabase
@@ -68,12 +70,12 @@ app.get('/api/search-history', async (req, res) => {
   }
 });
 
-// Handle Invalid Routes (404)
+// Handle invalid routes (404)
 app.use((req, res) => {
   res.status(404).send('404 - Not Found');
 });
 
-// Start the Server
+// Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
