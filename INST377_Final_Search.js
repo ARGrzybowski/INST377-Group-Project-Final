@@ -14,7 +14,7 @@ if (word) {
 
 async function fetchDefinition(word) {
     try {
-        const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+        const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word.trim()}`);
         const data = await response.json();
 
         if (data.title === 'No Definitions Found') {
@@ -41,10 +41,10 @@ function displayResults(data) {
                     htmlContent += `<p class="pronunciation"><strong>Pronunciation:</strong> ${phonetic.text}</p>`;
                 }
 
-                if (phonetic.audio) {
+                if (phonetic.audio && phonetic.audio.startsWith('http')) {
                     htmlContent += `<p><strong>Listen to the pronunciation:</strong></p>
                                     <audio controls>
-                                        <source src="https:${phonetic.audio}" type="audio/mp3">
+                                        <source src="${phonetic.audio}" type="audio/mp3">
                                         Your browser does not support the audio element.
                                     </audio>`;
                 }
@@ -71,25 +71,23 @@ function displayResults(data) {
 
 async function storeSearchQuery(word) {
     try {
-        const response = await fetch('/api/save-search', {
+        const response = await fetch('http://localhost:3000/api/search-history', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                search_query: word, // Store the word in the 'search_query' column
+                search_query: word.trim(),
             })
         });
 
         if (!response.ok) {
             const data = await response.json();
-            console.error("Error storing search:", data.error);
+            console.error("Error storing search:", data.error || "Unknown error");
         } else {
-            console.log("Search query stored successfully!");
+            console.log(`Search query "${word}" stored successfully!`);
         }
     } catch (error) {
-        console.error("Error storing search:", error);
+        console.error("Error storing search:", error.message);
     }
 }
-
-
