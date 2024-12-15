@@ -140,7 +140,7 @@ INST377-Group-Project-Final/
 - **Response**: Returns a plain text message.
   
 
-### **Notes for Future Development**
+## **Notes for Future Development**
 1. Add more endpoints as required, such as `DELETE` or `PATCH` for search history.
 2. Integrate user-specific search histories (e.g., based on authentication).
 
