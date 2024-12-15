@@ -71,7 +71,7 @@ function displayResults(data) {
 
 async function storeSearchQuery(word) {
     try {
-        const response = await fetch('http://localhost:3000/api/search-history', {
+        const response = await fetch('https://inst-377-group-project-final.vercel.app/api/search-history', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
