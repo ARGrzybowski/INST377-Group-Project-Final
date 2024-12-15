@@ -1,53 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Word Lord - Search History</title>
-    <link rel="stylesheet" href="INST377_Final.css">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.0.0/dist/umd/supabase.min.js" type="module"></script>
+    <link rel="stylesheet" href="./INST377_Final.css">
 </head>
-
 <body>
     <header>
         <nav>
             <ul>
-                <li><a href="INST377_Final_Index.html">Home</a></li>
-                <li><a href="INST377_Final_Search.html">Search</a></li>
-                <li><a href="INST377_Final_About.html">About</a></li>
-                <li><a href="INST377_Final_History.html" class="active">Search History</a></li>
+                <li><a href="./INST377_Final_Index.html">Home</a></li>
+                <li><a href="./INST377_Final_Search.html">Search</a></li>
+                <li><a href="./INST377_Final_About.html">About</a></li>
+                <li><a href="./INST377_Final_History.html" class="active">Search History</a></li>
             </ul>
         </nav>
         <h1>Search History</h1>
-        <p>View your recent searches and explore your most frequently searched words.</p>
     </header>
 
     <main>
-        <section id="search-history">
+        <section id="history-section">
             <h2>Your Search History</h2>
             <table id="search-history-table">
-    <thead>
-        <tr>
-            <th>Search Query</th>
-            <th>Created At</th>
-        </tr>
-    </thead>
-    <tbody>
-        <!-- Dynamic rows will be added here -->
-    </tbody>
-</table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Search Query</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Rows will be dynamically added here -->
+                </tbody>
+            </table>
         </section>
     </main>
 
     <footer>
         <p>&copy; 2024 Word Lord. All Rights Reserved.</p>
-        <p><a href="INST377_Final_About.html">About Us</a> | <a href="Contact.html">Contact</a></p>
     </footer>
-
-    <script src="INST377_Final_History.js">
-    </script>
+    <script src="./INST377_Final_History.js"></script>
 </body>
-
 </html>
