@@ -135,7 +135,7 @@ INST377-Group-Project-Final/
 - **Notes**: Ensure the request includes a `search_query` key.
 
 
-#### 4. **404 Error Handling**
+#### 3. **404 Error Handling**
 - **Description**: Handles all invalid routes not matching existing endpoints.
 - **Response**: Returns a plain text message.
   
