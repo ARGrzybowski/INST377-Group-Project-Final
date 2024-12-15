@@ -4,10 +4,9 @@
 **Word Lord**
 
 ## Project Description
-Our group has constructed a web app that allows users to quickly and easily look up words they are unfamiliar with to get pronunciations, definitions, types of speech, and example usages in sentences. The app stores search history, allowing users to view previous words they searched. 
+Word Lord is a web application that allows users to quickly look up unfamiliar words for their pronunciations, definitions, parts of speech, and example usages in sentences. The app also saves search history, enabling users to revisit previously searched words.
 
-### Features:
-- **Search Functionality:** Users can search for a word and retrieve its pronunciation, definitions, part of speech, and example sentences using the [Free Dictionary API](https://dictionaryapi.dev/).
+- **Search Functionality:** Retrieve word data (pronunciation, definitions, part of speech, example sentences) using the Free Dictionary API. [Free Dictionary API](https://dictionaryapi.dev/).
 - **Search History:** A dedicated page where users can see a list of previous words they searched, saved in a Supabase database.
 - **About Page:** A simple page that provides an overview of the web app and how it works.
 - **User-Friendly Interface:** Easy navigation across **Home**, **Search**, **About**, and **Search History** pages.
@@ -61,24 +60,23 @@ Follow these steps to set up the project on your local machine:
 
 INST377-Group-Project-Final/
 │
-├── public/                         # Static assets and frontend files
-│   ├── INST377_Final_Index.html    # Home page
-│   ├── INST377_Final_Search.html   # Search page
-│   ├── INST377_Final_History.html  # Search history page
-│   ├── INST377_Final_About.html    # About page
-│   ├── INST377_Final_Contact.html  # Contact page
-│   ├── INST377_Final.css           # Styling for all pages
-│   ├── INST377_Final_Index.js      # JS logic for the home page
-│   ├── INST377_Final_Search.js     # JS for search functionality
-│   ├── INST377_Final_History.js    # JS to display search history
+├── public/                  # Static assets and frontend files
+│   ├── INST377_Final_Index.html     # Home page
+│   ├── INST377_Final_Search.html    # Search page
+│   ├── INST377_Final_History.html   # Search history page
+│   ├── INST377_Final_About.html     # About page
+│   ├── INST377_Final_Contact.html   # Contact page
+│   ├── INST377_Final.css            # Styling for all pages
+│   ├── INST377_Final_Index.js       # JS logic for home page
+│   ├── INST377_Final_Search.js      # JS for search functionality
+│   ├── INST377_Final_History.js     # JS for displaying search history
 │
-├── Server.js                       # Backend API routes and server
-├── app.js                          # Main entry point for backend
-├── package.json                    # Dependencies and project configuration
-├── package-lock.json               # Dependency lock file
-├── vercel.json                     # Configuration for Vercel deployment
-├── README.md                       # Documentation
-└── .gitignore                      # Ignored files
+├── Server.js               # Backend API routes and server
+├── package.json            # Dependencies and project configuration
+├── package-lock.json       # Dependency lock file
+├── vercel.json             # Configuration for Vercel deployment
+├── README.md               # Documentation
+└── .gitignore              # Ignored files
 
 
 ## Future Improvements
