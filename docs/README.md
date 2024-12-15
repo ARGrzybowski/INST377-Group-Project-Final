@@ -58,25 +58,26 @@ Follow these steps to set up the project on your local machine:
 
 ## Folder Structure
 
+```plaintext
 INST377-Group-Project-Final/
-│
 ├── public/                  # Static assets and frontend files
-│   ├── INST377_Final_Index.html     # Home page
-│   ├── INST377_Final_Search.html    # Search page
-│   ├── INST377_Final_History.html   # Search history page
-│   ├── INST377_Final_About.html     # About page
-│   ├── INST377_Final_Contact.html   # Contact page
-│   ├── INST377_Final.css            # Styling for all pages
-│   ├── INST377_Final_Index.js       # JS logic for home page
-│   ├── INST377_Final_Search.js      # JS for search functionality
-│   ├── INST377_Final_History.js     # JS for displaying search history
-│
-├── Server.js               # Backend API routes and server
-├── package.json            # Dependencies and project configuration
-├── package-lock.json       # Dependency lock file
-├── vercel.json             # Configuration for Vercel deployment
-├── README.md               # Documentation
-└── .gitignore              # Ignored files
+│   ├── INST377_Final_Index.html    # Home page
+│   ├── INST377_Final_Search.html   # Search page
+│   ├── INST377_Final_History.html  # Search history page
+│   ├── INST377_Final_About.html    # About page
+│   ├── INST377_Final_Contact.html  # Contact page
+│   ├── INST377_Final.css           # Styling for all pages
+│   ├── INST377_Final_Index.js      # JS logic for the home page
+│   ├── INST377_Final_Search.js     # JS for search functionality
+│   ├── INST377_Final_History.js    # JS for displaying search history
+├── Server.js                # Backend API routes and server
+├── app.js                   # Main entry point for backend
+├── package.json             # Dependencies and project configuration
+├── package-lock.json        # Dependency lock file
+├── vercel.json              # Configuration for Vercel deployment
+├── README.md                # Documentation
+└── .gitignore               # Ignored files
+```
 
 ## **API Documentation**
 
