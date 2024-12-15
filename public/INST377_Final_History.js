@@ -60,3 +60,5 @@ async function fetchSearchHistory() {
 
 // Fetch search history when the page loads
 window.addEventListener('load', fetchSearchHistory);
+
+//Testing commit error
