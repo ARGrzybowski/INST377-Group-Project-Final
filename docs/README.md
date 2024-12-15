@@ -78,6 +78,74 @@ INST377-Group-Project-Final/
 ├── README.md               # Documentation
 └── .gitignore              # Ignored files
 
+## **API Documentation**
+
+### Base URL
+- **Localhost**: `http://localhost:3000`
+- **Deployed**: Replace with your deployed Vercel link.
+
+### **Endpoints**
+
+#### 1. **GET `/api/search-history`**
+- **Description**: Retrieves the search history from the Supabase database.
+- **Response**: Returns an array of search queries along with their timestamps, ordered by the most recent.
+- **Example Request**:
+  ```
+  GET /api/search-history
+  ```
+- **Example Response**:
+  ```json
+  [
+    {
+      "search_query": "example",
+      "created_at": "2024-12-14T10:30:00Z"
+    },
+    {
+      "search_query": "test",
+      "created_at": "2024-12-14T09:20:00Z"
+    }
+  ]
+
+- **Notes**: Returns `500 Internal Server Error` if there’s an issue retrieving data from the database.
+
+#### 2. **POST `/api/search-history`**
+- **Description**: Saves a word search query to the Supabase database.
+- **Request Body**:
+  ```json
+  {
+    "search_query": "example"
+  }
+  ```
+- **Response**:
+  - **Success**:
+    ```json
+    {
+      "message": "Word saved successfully",
+      "data": [
+        {
+          "id": 1,
+          "search_query": "example",
+          "created_at": "2024-12-14T10:45:00Z"
+        }
+      ]
+    }
+  - **Error**:
+    - **400 Bad Request**: If `search_query` is missing.
+    - **500 Internal Server Error**: If there’s a database issue.
+- **Notes**: Ensure the request includes a `search_query` key.
+
+
+#### 4. **404 Error Handling**
+- **Description**: Handles all invalid routes not matching existing endpoints.
+- **Response**: Returns a plain text message.
+  
+
+### **Notes for Future Development**
+1. Add more endpoints as required, such as `DELETE` or `PATCH` for search history.
+2. Integrate user-specific search histories (e.g., based on authentication).
+
+Let me know if you need additional formatting or want help documenting future endpoints!
+
 
 ## Future Improvements
 - Add user authentication to personalize search history.
