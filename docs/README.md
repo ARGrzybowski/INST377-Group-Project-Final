@@ -71,7 +71,6 @@ INST377-Group-Project-Final/
 │   ├── INST377_Final_Search.js     # JS for search functionality
 │   ├── INST377_Final_History.js    # JS for displaying search history
 ├── Server.js                # Backend API routes and server
-├── app.js                   # Main entry point for backend
 ├── package.json             # Dependencies and project configuration
 ├── package-lock.json        # Dependency lock file
 ├── vercel.json              # Configuration for Vercel deployment
