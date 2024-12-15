@@ -56,7 +56,7 @@ app.get('/api/search-history', async (req, res) => {
   try {
     const { data, error } = await supabase
       .from('search_history')
-      .select('*')
+      .select('search_query, created_at')
       .order('created_at', { ascending: false });
 
     if (error) {
