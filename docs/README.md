@@ -82,7 +82,7 @@ INST377-Group-Project-Final/
 
 ### Base URL
 - **Localhost**: `http://localhost:3000`
-- **Deployed**: Replace with your deployed Vercel link.
+- **Deployed**: `https://inst-377-group-project-final.vercel.app/`
 
 ### **Endpoints**
 
