@@ -10,7 +10,6 @@ async function fetchSearchHistory() {
             data.forEach((entry) => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td>${entry.user_id}</td>
                     <td>${entry.search_query
                     }</td>
                     <td>${new Date(entry.created_at).toLocaleString()}</td>
